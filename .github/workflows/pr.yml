@@ -17,7 +17,11 @@ jobs:
   gates:
     name: verify + deny + regress + PR gates
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    # Target steady-state (cache-warm) runtime is <5 min (docs/agents/ci.md
+    # cost budget). This is a hang-guard, not the budget itself — a hard
+    # 5-min kill would false-fail legitimate cold-cache runs (first run,
+    # Cargo.lock changes, toolchain bumps).
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
