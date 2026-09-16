@@ -1,0 +1,60 @@
+name: PR
+
+# Linux-only, must finish well under 5 minutes (docs/agents/ci.md — cost is a
+# hard constraint; Windows/macOS runners are label- or main-gated in cross.yml).
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  gates:
+    name: verify + deny + regress + PR gates
+    runs-on: ubuntu-latest
+    # Target steady-state (cache-warm) runtime is <5 min (docs/agents/ci.md
+    # cost budget). This is a hang-guard, not the budget itself — a hard
+    # 5-min kill would false-fail legitimate cold-cache runs (first run,
+    # Cargo.lock changes, toolchain bumps).
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # need origin/${{ github.base_ref }} history for the gates' git diff
+          persist-credentials: false
+
+      # toolchain/components must match rust-toolchain.toml by hand: this
+      # action pins by @rev, it does not read the toolchain file.
+      - uses: dtolnay/rust-toolchain@02cb101ec7c40f2c49e1d9714d64511d8e1b74de # master, 2026-09-15
+        with:
+          toolchain: stable
+          components: rustfmt, clippy
+
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+
+      - uses: taiki-e/install-action@26e9283f268b880168bdbd2c545dfcd60ec2c6ab # v2.87.13
+        with:
+          tool: just,cargo-deny
+
+      - name: just ci-local (fmt, clippy, test, deny, regress)
+        run: just ci-local
+
+      - name: gate-diff-size
+        if: ${{ !contains(github.event.pull_request.labels.*.name, 'large-diff-approved') }}
+        run: just gate-diff-size origin/${{ github.base_ref }}
+
+      - name: gate-diff-size (bypassed)
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'large-diff-approved') }}
+        run: |
+          echo "gate-diff-size: SKIPPED — 'large-diff-approved' label applied by a human."
+
+      - name: gate-test-integrity
+        run: just gate-test-integrity origin/${{ github.base_ref }}
+
+      - name: gate-provenance
+        run: just gate-provenance origin/${{ github.base_ref }}
