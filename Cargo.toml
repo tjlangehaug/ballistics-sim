@@ -1,0 +1,20 @@
+[workspace]
+resolver = "3"
+# crates/app and crates/ballistics-py join the workspace in Phases 0/2
+# (adding them requires dependencies, and dependencies require ADRs).
+members = ["crates/ballistics"]
+
+[workspace.package]
+version = "0.0.1"
+edition = "2024"
+rust-version = "1.87"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+float_cmp = "warn"
+cast_possible_truncation = "warn"

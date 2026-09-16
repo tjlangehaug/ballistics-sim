@@ -1,0 +1,15 @@
+[package]
+name = "ballistics"
+description = "Validated external ballistics solver: f64, CPU-only, no graphics dependencies."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+# INVARIANT: no graphics/GPU dependencies may ever appear here (ADR 0003).
+# Every new dependency requires an ADR in the same PR.
+[dependencies]
+
+[lints]
+workspace = true

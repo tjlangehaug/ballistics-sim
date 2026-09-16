@@ -1,0 +1,6 @@
+# HUMAN DECISION: pin an exact version (e.g. channel = "1.95.0") once the
+# first build is green — authoritative numerical runs need a fixed compiler.
+[toolchain]
+channel = "stable"
+components = ["rustfmt", "clippy"]
+profile = "minimal"

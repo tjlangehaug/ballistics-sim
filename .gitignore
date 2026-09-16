@@ -1,0 +1,11 @@
+/target/
+**/target/
+.task/
+__pycache__/
+*.pyc
+.venv/
+*.jor
+.DS_Store
+# Tier-A bulk simulation output lives outside git; only curated,
+# versioned response databases are committed.
+/scratch/
