@@ -37,10 +37,13 @@ units-atmosphere -> drag-model-core -> drag-model-g7 -> point-mass-rk4 -> valida
 ## Tasks
 - [x] `pr-gates` — ci — `pr.yml` + diff-size / test-integrity / provenance
       gates. **Done** (merged; `docs/handoff/2026-09-15-pr-gates.md`).
-- [ ] `units-atmosphere` — ballistics — unit newtypes (`Mach`, `Metres`,
+- [x] `units-atmosphere` — ballistics — unit newtypes (`Mach`, `Meters`,
       `Radians`, …); independent station pressure / temperature /
-      humidity / altitude inputs, no silent ICAO defaults.
-      [slot: numerics, ~220 ln] blocked-by: none
+      humidity / altitude inputs, no silent ICAO defaults. **Done**
+      (merged as two PRs, #5 + #7 — see
+      `docs/handoff/2026-09-19-units-atmosphere.md` and
+      `docs/handoff/2026-09-19-units-atmosphere-density.md`).
+      [slot: numerics, ~220 ln estimated / 511 ln actual] blocked-by: none
 - [ ] `drag-model-core` — ballistics — `DragModel` trait, G1 standard
       table, custom Cd-vs-Mach table loader (first-class, per report §5,
       not bolted on after G1/G7).
