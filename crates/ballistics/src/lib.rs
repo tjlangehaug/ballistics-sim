@@ -5,6 +5,8 @@
 //! - Deterministic: same inputs and thread count give bit-identical output.
 //! - Every public item documents its units.
 
+pub mod units;
+
 /// Solver version recorded in every provenance record
 /// (`docs/provenance/README.md`). Dimensionless string, semver.
 pub const SOLVER_VERSION: &str = env!("CARGO_PKG_VERSION");
