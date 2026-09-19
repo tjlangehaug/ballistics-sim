@@ -6,3 +6,4 @@ One line per merged PR: `YYYY-MM-DD | #PR | role/slug | one-line summary`
 2026-09-19 | — | arch/plan-phase-0 | Phase 0 plan finalized: ADRs 0007-0008, sequenced task list, HUMAN DECISIONS trimmed
 2026-09-19 | — | arch/plan-phase-0-briefs | Seven Phase 0 task briefs in docs/briefs/
 2026-09-19 | — | ballistics/units-atmosphere | Unit newtypes: Meters, Radians, MetersPerSecond, Mach, Kelvin, Pascals, RelativeHumidity, KilogramsPerCubicMeter
+2026-09-19 | — | ballistics/units-atmosphere-density | Atmosphere (independent inputs) + derived air_density()

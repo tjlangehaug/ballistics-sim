@@ -5,6 +5,7 @@
 //! - Deterministic: same inputs and thread count give bit-identical output.
 //! - Every public item documents its units.
 
+pub mod atmosphere;
 pub mod units;
 
 /// Solver version recorded in every provenance record
