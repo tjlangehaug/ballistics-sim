@@ -25,8 +25,8 @@ next phase start. No exceptions — this is the convergence mechanism.
 - [ ] Squash-merge only enabled in repo settings
 - [ ] `needs-cross` and `large-diff-approved` labels created
 - [ ] Human decision: Rust edition/toolchain pin confirmed (`rust-toolchain.toml`)
-- [ ] First PR through the loop: CI agent — `pr.yml` + three custom gates (task `pr-gates`)
-- [ ] Architect session: Phase 0 decomposed into sub-400-line briefs in `docs/briefs/`
+- [x] First PR through the loop: CI agent — `pr.yml` + three custom gates (task `pr-gates`)
+- [x] Architect session: Phase 0 decomposed into sub-400-line briefs in `docs/briefs/`
 - [ ] Test agent: validation harness + ≥1 published fixture
 - [ ] Ballistics agent: point-mass integrator reproduces that fixture in CI
 
